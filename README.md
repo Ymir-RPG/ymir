@@ -22,6 +22,7 @@ Although these really aren't universal laws, these are characteristics that show
   * Utility actions
   * Persistent spells
   * Tricks...?
+
 ##### The World
 * Locations
 * Maps
