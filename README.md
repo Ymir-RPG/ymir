@@ -5,6 +5,16 @@ Ymir is the driver for the Ymir-RPG application ecosystem. All sub-applications/
 ### The Universal Laws of Tabletop Games
 Although these really aren't universal laws, these are characteristics that show up in nearly every tabletop RPG, and thus need to have core support in Ymir.
 
+##### Campaigns
+* Campaigns have a single dungeon master at one time.
+  * Dungeon master can give away their role to another user involved in the campaign, but relinquishes their omniscience.
+* A single user can be involved in multiple campaigns
+* A single user can have multiple characters in a single campaign
+* Question: can a single user have the same character across multiple campaigns?
+  * Answer A: Clone the character. Should be easy to do, clear use case for that.
+  * Answer B: Persistent, updating character involved in two campaigns. Harder to implement, not sure of use case.
+
+
 ##### Characters
 * Personal story and background
 * Various statistics
