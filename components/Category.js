@@ -36,6 +36,7 @@ var Category = React.createClass({
 
 	rm: function(id){
 		Model(getCookie('worldId'))[this.props.category].del(id).then(function(res){
+			console.log("successfully deleted");
 			console.log(res);
 		});
 		location.reload()
