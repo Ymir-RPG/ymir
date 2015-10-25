@@ -1,0 +1,19 @@
+.top-nav {
+	position: relative;
+	z-index: 1000000;
+	height: 50px;
+	width: 100%;
+
+	border-bottom: 1px solid #FFFFFF;
+	color: #CCCCCC;
+
+	background-color: #000000;
+}
+
+.table-of-contents {
+	background-color: #000000;
+	color: #EEEEEE;
+
+	border: 1px solid #FFFFFF;
+	height: 300px;
+}
