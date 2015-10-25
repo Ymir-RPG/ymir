@@ -1,10 +1,13 @@
+// Created by Jeff. June-August, 2015.
+// Format: Box, Border, Colors, Text, Other, Mixins (Recursive)
+
+@import "variables-skin";
+@import "variables-structure";
+@import "mixins";
+
 .top-nav {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing:     border-box;
-  box-sizing:         border-box;
 	position: relative;
-	
+
 	z-index: 1000000;
 	height: 50px;
 	width: 100%;
@@ -14,6 +17,7 @@
 
 	background-color: #000000;
 	padding: 5px;
+	.border-box();
 }
 
 .table-of-contents {

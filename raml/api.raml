@@ -7,6 +7,10 @@ version: v1
 /worlds:
   get:
     description: Get list of all worlds
+    queryParameters:
+      chronological: 
+        type: boolean
+        required: false
     responses:
       200:
         body:
@@ -16,12 +20,12 @@ version: v1
                 {
                   "id": 1,
                   "name": "The World",
-                  "lastEdited": "2012-04-23T18:25:43.511Z",
+                  "lastUpdated": "2012-04-23T18:25:43.511Z",
                 },
                 {
                   "id": 2,
                   "name": "Another World",
-                  "lastEdited": "2012-04-23T18:25:43.511Z",
+                  "lastUpdated": "2012-04-23T18:25:43.511Z",
                 }
               ]
   post: 
@@ -43,7 +47,7 @@ version: v1
                 {
                   "id": 1,
                   "name": "World name",
-                  "lastEdited": "2012-04-23T18:25:43.511Z",
+                  "lastUpdated": "2012-04-23T18:25:43.511Z",
                 }
         404:
     put:
@@ -58,6 +62,10 @@ version: v1
 
     /characters:
       get:
+        queryParameters:
+          chronological: 
+            type: boolean
+            required: false
         description: Get list of all characters
         responses:
           200:
@@ -70,14 +78,14 @@ version: v1
                       "name": "Skyler Berg",
                       "place_id": 1,
                       "world_id": 1,
-                      "lastEdited": "2012-04-23T18:25:43.511Z",
+                      "lastUpdated": "2012-04-23T18:25:43.511Z",
                     },
                     {
                       "id": 2,
                       "name": "Jeff Bayes",
                       "place_id": 1,
                       "world_id": 1,
-                      "lastEdited": "2012-04-23T18:25:43.511Z",
+                      "lastUpdated": "2012-04-23T18:25:43.511Z",
                     }
                   ]
       post:
@@ -97,7 +105,7 @@ version: v1
           queryParameters:
             place_id:
               type: integer
-              require: false
+              required: false
           responses:
             200:
               body:
@@ -108,7 +116,7 @@ version: v1
                       "name": "Skyler Berg",
                       "place_id": 1,
                       "world_id": 1,
-                      "lastEdited": "2012-04-23T18:25:43.511Z",
+                      "lastUpdated": "2012-04-23T18:25:43.511Z",
                     },
             404:
         put:
@@ -132,6 +140,10 @@ version: v1
     /places:
       get:
         description: Get list of all places in a world
+        queryParameters:
+          chronological: 
+            type: boolean
+            required: false
         responses:
           200:
             body:
@@ -142,7 +154,7 @@ version: v1
                       "id": 1,
                       "name": "University of Oregon"
                       "world_id": 1,
-                      "lastEdited": "2012-04-23T18:25:43.511Z",
+                      "lastUpdated": "2012-04-23T18:25:43.511Z",
                     },
                   ]
       post:
