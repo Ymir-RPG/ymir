@@ -1,3 +1,5 @@
+var React = require('react');
+
 var TableOfContents = React.createClass({
 
     render: function() {
@@ -5,3 +7,4 @@ var TableOfContents = React.createClass({
     }
 });
 
+module.exports = TableOfContents;
