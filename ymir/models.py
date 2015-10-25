@@ -73,3 +73,30 @@ class Place(Base):
 
     def __repr__(self):
         return "<Place(name='%s')>" % self.name
+
+
+class Item(Base):
+    __tablename__ = "items"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    world_id = Column(Integer, ForeignKey("worlds.id"))
+    world = relationship("World", backref=backref("items", order_by=id))
+    place_id = Column(Integer, ForeignKey("items.id"))
+    place = relationship("Place", backref=backref("items", order_by=id))
+    character_id = Column(Integer, ForeignKey("characters.id"))
+    place = relationship("Place", backref=backref("items", order_by=id))
+    last_updated = Column(DateTime)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "worldId": self.world_id,
+            "placeId": self.place_id,
+            "characterId": self.character_id,
+            "lastUpdated": date2str(self.last_updated),
+        }
+
+    def __repr__(self):
+        return "<Items(name='%s')>" % self.name
