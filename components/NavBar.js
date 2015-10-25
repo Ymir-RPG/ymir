@@ -7,11 +7,11 @@ var NavBar = React.createClass({
     		<div className = "top-nav">
     			<div className="container">
     				<span className="nav-text">
-    					<a href="overview.html">
+    					<a href="worldList.html">
     						Ymir RPG
     					</a>
     				</span>
-    				<a className="nav-text" href="worldList.html">Worlds</a>
+    				<a className="nav-text" href="places.html">Places</a>
     				<a className="nav-text" href="character.html">Characters</a>
     			</div>
     		</div>

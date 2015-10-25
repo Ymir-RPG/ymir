@@ -41,7 +41,7 @@ var WorldList = React.createClass({
 	render: function(){
 		var foo = this.state.worlds.map((i,n)=>{
 			return(
-				<li key={n}> <a onClick={this.changeWorld.bind(this, i.id)}>{i.id}: {i.name}</a></li>
+				<li key={n}> <a onClick={this.changeWorld.bind(this, i.id)}>{i.name}</a></li>
 			);
 		});
 	    return(
@@ -51,7 +51,7 @@ var WorldList = React.createClass({
 					<br />
 					<br />
 					<br />	
-					<h1 className="center">WorldList </h1>
+					<h1 className="center">Campaign Settings</h1>
 					<ul>
 						{foo}
 					</ul>
