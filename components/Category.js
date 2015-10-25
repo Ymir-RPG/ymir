@@ -43,7 +43,7 @@ var Category = React.createClass({
 		});
 	    return(
 	    	<div id="CAT">
-				<h1>{this.props.category} <a href={this.props.category + "Edit.html"}>+</a> </h1>
+				<h1>{this.props.category} <a href={this.props.category + "Add.html"}>+</a> </h1>
 				<input className="search" placeholder="Search" />
 				<ul className="list">
 					{items}

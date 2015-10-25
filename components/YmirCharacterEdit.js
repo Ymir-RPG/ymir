@@ -17,7 +17,7 @@ function getCookie(cname) {
 
 var CharacterEdit = React.createClass({
 	getInitialState: function(){
-	    return {worlds:[]}
+	    return {worlds:[], ch:{}}
 	},
 	componentDidMount: function(){
 	    var self = this;
@@ -28,7 +28,13 @@ var CharacterEdit = React.createClass({
 	        self.setState(st);
 	    }).catch(function(res){
 	    	console.log(res)
-	    })
+	    });
+	    if(this.props.id){
+	    	Model.Characters.findOne(this.props.id).then(function(res){
+	    		console.log(res);
+	    	})
+	    }
+	   
 	},
 	save: function(){
 		var name = document.getElementById('name').value;
