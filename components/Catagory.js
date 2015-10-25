@@ -1,19 +1,18 @@
 // search.js
 var React = require('react');
 var ReactDOM = require('react-dom');
-var NavBar = require('./NavBar');
 var ymirAPI =require('../static/js/ymirWrapper.js');
-var Model = ymirAPI(1);
+var Model = ymirAPI('1');
 
-
-var Search = React.createClass({
+var Catagory = React.createClass({
 	getInitialState: function(){
 	    return {worlds:[]}
 	},
 
 	componentDidMount: function(){
 	    var self = this;
-	    Model.Worlds.all().then(function(res){
+	    Model['Characters'].all().then(function(res){
+	    	console.log(res);
 	        var st=self.state;
 	        st.worlds = res.data;
 	        self.setState(st);
@@ -21,24 +20,19 @@ var Search = React.createClass({
 	},
 
 	render: function(){
-		var foo = this.state.worlds.map(function(i){
+		var foo = this.state.worlds.map((i,n)=>{
 			return(
-				<li> {i.id}: {i.name}</li>
+				<li key={n}> <a>{i.id}: {i.name}</a></li>
 			);
 		});
 	    return(
 	    	<div>
-				<NavBar />	    		
-				<h1>Search </h1>
-				<ul>
-					{foo}
-				</ul>
+				<h1>{this.props.catagory} </h1>
+				{foo}
 	    	</div>
 	    )
 	}
 })
 
-ReactDOM.render(
-  <Search  />,
-  document.getElementById('react')
-);
+module.exports = Catagory;
+
