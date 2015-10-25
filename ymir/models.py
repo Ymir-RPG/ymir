@@ -85,7 +85,7 @@ class Item(Base):
     place_id = Column(Integer, ForeignKey("items.id"))
     place = relationship("Place", backref=backref("items", order_by=id))
     character_id = Column(Integer, ForeignKey("characters.id"))
-    place = relationship("Place", backref=backref("items", order_by=id))
+    character = relationship("Character", backref=backref("items", order_by=id))
     last_updated = Column(DateTime)
 
     def to_dict(self):
