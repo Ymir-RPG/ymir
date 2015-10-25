@@ -66,7 +66,7 @@ module.exports = function (grunt) {
         tasks: ['less']
       },
       channelsScripts: {
-        files: ['components/**/*.js'],
+        files: ['components/*.js'],
         tasks: ['browserify']
       }
     },
