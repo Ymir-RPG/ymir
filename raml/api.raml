@@ -189,3 +189,72 @@ version: v1
           responses:
             204:
             404:
+    /items:
+      get:
+        description: Get list of all items in a world
+        queryParameters:
+          place_id:
+            type: string
+            required: false
+          character_id:
+            type: string
+            required: false
+          chronological: 
+            type: boolean
+            required: false
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  [
+                    {
+                      "id": 1,
+                      "name": "Sword"
+                      "world_id": 1,
+                      "place_id": null,
+                      "character_id": 1,
+                      "lastUpdated": "2012-04-23T18:25:43.511Z",
+                    },
+                  ]
+      post:
+        description: Create a new item
+        queryParameters:
+          name:
+            type: string
+            required: true
+          place_id:
+            type: string
+            required: false
+          character_id:
+            type: string
+            required: false
+        responses:
+          200:
+      /{itemId}:
+        get:
+          description: Get the item where `id == {itemId}`
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {
+                      "id": 1,
+                      "name": "Sword"
+                      "world_id": 1,
+                      "place_id": null,
+                      "character_id": 1,
+                      "lastUpdated": "2012-04-23T18:25:43.511Z",
+                    }
+            404:
+        put:
+          description: Update the item where `id == {itemId}`
+          responses:
+            200:
+            404:
+        delete:
+          description: Delete the item where `id == {itemId}`
+          responses:
+            204:
+            404:

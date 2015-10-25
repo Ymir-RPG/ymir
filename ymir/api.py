@@ -5,7 +5,7 @@ from flask import request, abort
 from sqlalchemy import and_
 from sqlalchemy.orm.exc import NoResultFound
 
-from ymir.models import World, Character, Place
+from ymir.models import World, Character, Place, Item
 from ymir.db import get_session
 from ymir import app
 
@@ -195,5 +195,72 @@ def places_name_delete(world_id, place_id):
     except NoResultFound:
         abort(404)
     session.delete(place)
+    session.commit()
+    return ('', 204)
+
+
+@app.route("/worlds/<world_id>/items", methods=["GET"])
+def item_get(world_id):
+    data = _get_request_data(request)
+    query = session.query(Item).filter(Item.world_id == world_id)
+    if data.get('chronological', False):
+        query = query.order_by(Item.last_updated.desc())
+    if "placeId" in data:
+        query = query.filter(Character.place_id == data["placeId"])
+    if "characterId" in data:
+        query = query.filter(Item.character_id == data["itemId"])
+    return json.dumps([i.to_dict() for i in query.all()])
+
+
+@app.route("/worlds/<world_id>/items", methods=["POST"])
+def items_post(world_id):
+    data = _get_request_data(request)
+    name = data["name"]
+    item = Item(name=name, world_id=world_id)
+    if "placeId" in data:
+        item.place_id = data["placeId"]
+    if "characterId" in data:
+        item.character_id = data["characterId"]
+    item.last_updated = datetime.now()
+    session.add(item)
+    session.commit()
+    return json.dumps(item.to_dict())
+
+
+@app.route("/worlds/<world_id>/items/<item_id>", methods=["GET"])
+def item_get(world_id, item_id):
+    try:
+        return json.dumps(session.query(Item).filter(and_(
+            Item.world_id == world_id,
+            Item.id == item_id)).one().to_dict())
+    except NoResultFound:
+        abort(404)
+
+
+@app.route("/worlds/<world_id>/items/<item_id>", methods=["PUT"])
+def item_put(world_id, item_id):
+    data = _get_request_data(request)
+    try:
+        item = session.query(Item).filter(
+            and_(Item.world_id == world_id, Item.id == item_id)).one()
+    except NoResultFound:
+        abort(404)
+    item.name = data.get("name", item.name)
+    item.place_id = data.get("place_id", item.place_id)
+    item.character_id = data.get("character_id", item.character_id)
+    item.last_updated = datetime.now()
+    session.commit()
+    # TODO(Skyler): If there is no change, we should return a different status
+    return json.dumps(character.to_dict())
+
+
+@app.route("/worlds/<world_id>/items/<item_id>", methods=["DELETE"])
+def item_delete(world_id, item_id):
+    try:
+        item = session.query(Item).filter(
+            and_(Item.world_id == world_id, Item.id == item_id)).one()
+    except NoResultFound:
+        abort(404)
+    session.delete(item)
     session.commit()
     return ('', 204)
