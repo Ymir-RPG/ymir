@@ -16,7 +16,7 @@ def worlds_get():
 
 @app.route("/worlds", methods=["POST"])
 def worlds_post():
-    name = request.args["name"]
+    name = request.args.get("name", None) or request.form.get("name", None)
     session.add(World(name=name))
     session.commit()
     return ('', 204)
@@ -33,7 +33,7 @@ def world_id_get(world_id):
 
 @app.route("/worlds/<world_id>", methods=["PUT"])
 def world_id_put(world_id):
-    name = request.args["name"]
+    name = request.args.get("name", None) or request.form.get("name", None)
     world = session.query(World).filter(World.id == world_id).one()
     world.name = name
     session.commit()
@@ -59,7 +59,7 @@ def characters_get(world_id):
 
 @app.route("/worlds/<world_id>/characters", methods=["POST"])
 def characters_post(world_id):
-    name = request.args["name"]
+    name = request.args.get("name", None) or request.form.get("name", None)
     character = Character(name=name, world_id=world_id)
     session.add(character)
     session.commit()
@@ -82,8 +82,8 @@ def character_name_put(world_id, character_id):
             and_(Character.world_id == world_id, Character.id == character_id)).one()
     except NoResultFound:
         abort(404)
-    if request.args["name"]:
-        character.name = request.args["name"]
+    if request.args.get("name", None) or request.form.get("name", None):
+        character.name = request.args.get("name", None) or request.form.get("name", None)
     session.commit()
     # TODO(Skyler): If there is no change, we should return a different status
     return json.dumps(character.to_dict())
@@ -110,7 +110,7 @@ def places_get(world_id):
 
 @app.route("/worlds/<world_id>/places", methods=["POST"])
 def places_post(world_id):
-    name = request.args["name"]
+    name = request.args.get("name", None) or request.form.get("name", None)
     place = Place(name=name, world_id=world_id)
     session.add(place)
     session.commit()
@@ -133,8 +133,8 @@ def places_name_put(world_id, place_id):
             and_(Place.world_id == world_id, Place.id == place_id)).one()
     except NoResultFound:
         abort(404)
-    if request.args["name"]:
-        place.name = request.args["name"]
+    if request.args.get("name", None) or request.form.get("name", None):
+        place.name = request.args.get("name", None) or request.form.get("name", None)
     session.commit()
     # TODO(Skyler): If there is no change, we should return a different status
     return json.dumps(place.to_dict())
