@@ -12,16 +12,18 @@ var YmirOverview = React.createClass({
         return (
             <div>
                 <NavBar />
-                <h1 className="text-center">Ymir RPG Campaign Manager</h1>
-                <TableOfContents>
-                    <h4 className="text-center">Table of Contents</h4>
-                    <a href="character.html">Character</a>
-                    <br/>
-                    <a href="places.html">Places</a>
-                </TableOfContents>
-                <OverviewFeed>
-                    <h3 className="text-center">I MUST FEED</h3>
-                </OverviewFeed>
+                <div className="container"> 
+                    <h1 className="text-center">Ymir RPG Campaign Manager</h1>
+                    <TableOfContents>
+                        <h4 className="text-center">Table of Contents</h4>
+                        <a href="character.html">Character</a>
+                        <br/>
+                        <a href="places.html">Places</a>
+                    </TableOfContents>
+                    <OverviewFeed>
+                        <h3 className="text-center">FEED</h3>
+                    </OverviewFeed>
+                </div>
             </div>
         );
     }

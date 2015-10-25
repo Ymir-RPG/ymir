@@ -45,13 +45,15 @@ var WorldList = React.createClass({
 		});
 	    return(
 	    	<div>
-				<NavBar />	    		
-				<h1>WorldList </h1>
-				<ul>
-					{foo}
-				</ul>
-				<input type="text" name="name" id="worldName"/>
-				<button onClick={this.create} >new world</button>
+				<NavBar />
+				<div className="container">		
+					<h1>WorldList </h1>
+					<ul>
+						{foo}
+					</ul>
+					<input type="text" name="name" id="worldName"/>
+					<button onClick={this.create} >new world</button>
+				</div>
 	    	</div>
 	    )
 	}

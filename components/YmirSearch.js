@@ -28,11 +28,13 @@ var Search = React.createClass({
 		});
 	    return(
 	    	<div>
-				<NavBar />	    		
-				<h1>Search </h1>
-				<ul>
-					{foo}
-				</ul>
+				<NavBar />
+				<div className="container">     		
+					<h1>Search </h1>
+					<ul>
+						{foo}
+					</ul>
+				</div>
 	    	</div>
 	    )
 	}
