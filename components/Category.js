@@ -53,7 +53,7 @@ var Category = React.createClass({
 				<li key={n}>
 					<a className="name">{i.name}</a>
 					<a className="button sm-button" onClick={function(){self.cookieFunction(i.id)}}>edit</a>
-					<a className="button sm-button" onClick={self.rm.bind(this,i.id)}>delete</a>
+					<a className="button sm-button" onClick={self.rm(i.id)}>delete</a>
 				</li>
 			);
 		});
