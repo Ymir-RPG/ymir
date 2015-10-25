@@ -49,5 +49,12 @@ class Place(Base):
     world_id = Column(Integer, ForeignKey("worlds.id"))
     world = relationship("World", backref=backref("places", order_by=id))
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "world_id": self.world_id,
+        }
+
     def __repr__(self):
         return "<Place(name='%s')>" % self.name

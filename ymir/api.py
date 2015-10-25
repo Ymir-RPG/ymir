@@ -53,11 +53,8 @@ def world_id_delete(world_id):
 
 @app.route("/worlds/<world_id>/characters", methods=["GET"])
 def characters_get(world_id):
-    try:
-        return json.dumps([i.to_dict() for i in session.query(
-            Character).filter(Character.world_id == world_id).all()])
-    except NoResultFound:
-        abort(404)
+    return json.dumps([i.to_dict() for i in session.query(
+        Character).filter(Character.world_id == world_id).all()])
 
 
 @app.route("/worlds/<world_id>/characters", methods=["POST"])
@@ -102,3 +99,55 @@ def character_name_delete(world_id, character_id):
         abort(404)
     session.delete(character)
     session.commit()
+    return ('', 204)
+
+
+@app.route("/worlds/<world_id>/places", methods=["GET"])
+def places_get(world_id):
+    return json.dumps([i.to_dict() for i in session.query(
+        Place).filter(Place.world_id == world_id).all()])
+
+
+@app.route("/worlds/<world_id>/places", methods=["POST"])
+def places_post(world_id):
+    name = request.args["name"]
+    place = Place(name=name, world_id=world_id)
+    session.add(place)
+    session.commit()
+    return json.dumps(place.to_dict())
+
+
+@app.route("/worlds/<world_id>/places/<places_id>", methods=["GET"])
+def places_id_get(world_id, places_id):
+    try:
+        return json.dumps(session.query(Place).filter(and_(
+            Place.world_id == world_id, Place.id == places_id)).one().to_dict())
+    except NoResultFound:
+        abort(404)
+
+
+@app.route("/worlds/<world_id>/places/<place_id>", methods=["PUT"])
+def places_name_put(world_id, place_id):
+    try:
+        place = session.query(Place).filter(
+            and_(Place.world_id == world_id, Place.id == place_id)).one()
+    except NoResultFound:
+        abort(404)
+    if request.args["name"]:
+        place.name = request.args["name"]
+    session.commit()
+    # TODO(Skyler): If there is no change, we should return a different status
+    return json.dumps(place.to_dict())
+
+
+@app.route("/worlds/<world_id>/places/<place_id>",
+           methods=["DELETE"])
+def places_name_delete(world_id, place_id):
+    try:
+        place = session.query(Place).filter(
+            and_(Place.world_id == world_id, Place.id == place_id)).one()
+    except NoResultFound:
+        abort(404)
+    session.delete(place)
+    session.commit()
+    return ('', 204)
