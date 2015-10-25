@@ -1,5 +1,10 @@
 .top-nav {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing:     border-box;
+  box-sizing:         border-box;
 	position: relative;
+	
 	z-index: 1000000;
 	height: 50px;
 	width: 100%;
@@ -8,6 +13,7 @@
 	color: #CCCCCC;
 
 	background-color: #000000;
+	padding: 5px;
 }
 
 .table-of-contents {
@@ -16,4 +22,14 @@
 
 	border: 1px solid #FFFFFF;
 	height: 300px;
+	padding: 5px;
+}
+
+.overview-feed {
+	background-color: #000000;
+	color: #EEEEEE;
+
+	border: 1px solid #FFFFFF;
+	height: 300px;
+	padding: 5px;
 }

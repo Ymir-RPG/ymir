@@ -1,0 +1,27 @@
+{
+  "name": "ymir",
+  "version": "0.0.0",
+  "description": "Ymir is the driver for the Ymir-RPG application ecosystem. All sub-applications/microservices in the ecosystem are modules that hook in to this driver to function. Ymir is designed to provide value to players of any table-top RPG, from Dungeons and Dragons to your own homebrew system. Microservices can be made to serve any specific tabletop universe, or made to the same generic specifications as the driver.",
+  "main": "index.js",
+  "dependencies": {
+    "babelify": "~6.4.0",
+    "browserify": "~11.2.0",
+    "watchify": "~3.4.0",
+    "react-dom": "~0.14.0",
+    "react": "~0.14.0",
+    "axios": "~0.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ymir-RPG/ymir.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Ymir-RPG/ymir/issues"
+  }
+}

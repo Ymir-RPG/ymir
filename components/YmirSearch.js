@@ -6,7 +6,7 @@ var ymirAPI =require('../static/js/ymirWrapper.js');
 var Model = ymirAPI(1);
 
 
-var WorldList = React.createClass({
+var Search = React.createClass({
 	getInitialState: function(){
 	    return {worlds:[]}
 	},
@@ -29,7 +29,7 @@ var WorldList = React.createClass({
 	    return(
 	    	<div>
 				<NavBar />	    		
-				<h1>WorldList </h1>
+				<h1>Search </h1>
 				<ul>
 					{foo}
 				</ul>
@@ -39,6 +39,8 @@ var WorldList = React.createClass({
 })
 
 ReactDOM.render(
-  <WorldList/>,
+  <div>
+  	<NavBar />
+  </div>,
   document.getElementById('react')
 );
