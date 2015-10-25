@@ -15,6 +15,13 @@ var resource = function(resource){
 		all: function(){
 			return axios.get(urlify(resource))
 		},
+		chrono: function(){
+			return axios.get(urlify(resource), {
+				params:{
+					chrologilical:true
+				}
+			})
+		},
 		findOne: function(id){
 			resource.push(id)
 			return axios.get(urlify(resource))
