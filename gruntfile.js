@@ -62,6 +62,18 @@ module.exports = function (grunt) {
         src: "components/YmirCharacterAdd.js",
         dest: "components/dist/YmirCharacterAdd.min.js"
       },
+      place: {
+        src: "components/YmirPlaces.js",
+        dest: "components/dist/YmirPlaces.min.js"
+      },
+      placeEdit: {
+        src: "components/YmirPlaceEdit.js",
+        dest: "components/dist/YmirPlaceEdit.min.js"
+      },
+      placeAdd: {
+        src: "components/YmirPlaceAdd.js",
+        dest: "components/dist/YmirPlaceAdd.min.js"
+      },
       search: {
         src: "components/YmirSearch.js",
         dest: "components/dist/YmirSearch.min.js"

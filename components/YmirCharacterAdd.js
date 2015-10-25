@@ -4,6 +4,7 @@ var ReactDOM = require('react-dom');
 var NavBar = require('./NavBar');
 var ymirAPI =require('../static/js/ymirWrapper.js');
 var Model = ymirAPI(getCookie('worldId'));
+
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
