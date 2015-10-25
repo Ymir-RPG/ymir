@@ -6,6 +6,8 @@ var NavBar = React.createClass({
     	return (
     		<div className = "top-nav">
     			<span className="nav-text">Ymir RPG</span>
+    			<a href="worldList.html">worlds </a>
+    			<a href="character.html"> characters</a>
     		</div>
     	);
     }
