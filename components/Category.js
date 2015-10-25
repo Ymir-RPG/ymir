@@ -42,7 +42,7 @@ var Category = React.createClass({
 		});
 	    return(
 	    	<div>
-				<h1>{this.props.category} <a>+</a> </h1>
+				<h1>{this.props.category} <a href={this.props.category + "Edit.html"}>+</a> </h1>
 				{foo}
 	    	</div>
 	    )
