@@ -5,9 +5,15 @@ from sqlalchemy import and_
 from sqlalchemy.orm.exc import NoResultFound
 
 from ymir.models import World, Character, Place
-from ymir.db import session
+from ymir.db import get_session
 from ymir import app
 
+
+session = get_session()
+
+def set_session(db_conn_str):
+    global session
+    session = get_session(db_conn_str)
 
 def _get_request_data(request):
     results = {}
@@ -29,9 +35,10 @@ def worlds_get():
 def worlds_post():
     data = _get_request_data(request)
     name = data["name"]
+    world = World(name=name)
     session.add(World(name=name))
     session.commit()
-    return ('', 204)
+    return json.dumps(world.to_dict())
 
 
 @app.route("/worlds/<world_id>", methods=["GET"])
@@ -66,8 +73,11 @@ def world_id_delete(world_id):
 
 @app.route("/worlds/<world_id>/characters", methods=["GET"])
 def characters_get(world_id):
-    return json.dumps([i.to_dict() for i in session.query(
-        Character).filter(Character.world_id == world_id).all()])
+    data = _get_request_data(request)
+    query = session.query(Character).filter(Character.world_id == world_id)
+    if "placeId" in data:
+        query = query.filter(Character.place_id == data["placeId"])
+    return json.dumps([i.to_dict() for i in query.all()])
 
 
 @app.route("/worlds/<world_id>/characters", methods=["POST"])
@@ -75,6 +85,8 @@ def characters_post(world_id):
     data = _get_request_data(request)
     name = data["name"]
     character = Character(name=name, world_id=world_id)
+    if "placeId" in data:
+        character.place_id = data["placeId"]
     session.add(character)
     session.commit()
     return json.dumps(character.to_dict())
@@ -84,7 +96,8 @@ def characters_post(world_id):
 def character_id_get(world_id, character_id):
     try:
         return json.dumps(session.query(Character).filter(and_(
-            Character.world_id == world_id, Character.id == character_id)).one().to_dict())
+            Character.world_id == world_id,
+            Character.id == character_id)).one().to_dict())
     except NoResultFound:
         abort(404)
 
@@ -98,6 +111,7 @@ def character_name_put(world_id, character_id):
     except NoResultFound:
         abort(404)
     character.name = data.get("name", character.name)
+    character.place_id = data.get("place_id", character.place_id)
     session.commit()
     # TODO(Skyler): If there is no change, we should return a different status
     return json.dumps(character.to_dict())
@@ -127,6 +141,7 @@ def places_post(world_id):
     data = _get_request_data(request)
     name = data["name"]
     place = Place(name=name, world_id=world_id)
+
     session.add(place)
     session.commit()
     return json.dumps(place.to_dict())
