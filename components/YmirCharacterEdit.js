@@ -52,9 +52,10 @@ var CharacterEdit = React.createClass({
 		});
 		return(
 			<div className="sm-container edit-form">
-				<textfield>name</textfield> <br />
+				<h2 className="text-center">Edit Character</h2>
+				<textfield>Name</textfield> <br />
 				<input type="text" id="name" />	<br />
-				<textfield>place</textfield> <br />
+				<textfield>Place</textfield> <br />
 				<select id="place" selected={this.state.ch.id}>
 					{options}
 				</select> <br />

@@ -51,9 +51,10 @@ var CharacterEdit = React.createClass({
 		});
 		return(
 			<div className="sm-container edit-form">
-				<textfield>name</textfield>
+				<h2 className="text-center">Add Character</h2>
+				<textfield>Name</textfield>
 				<input id="name"/>	<br />
-				<textfield>place</textfield>
+				<textfield>Place</textfield>
 				<select id="place">
 					{options}
 				</select> <br />

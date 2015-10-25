@@ -50,14 +50,11 @@ var PlaceEdit = React.createClass({
 			);
 		});
 		return(
-			<div>
-				<textfield>name</textfield>
+			<div className="sm-container edit-form">
+				<h2 className="text-center">Edit Place</h2>
+				<textfield>Name</textfield>
 				{this.state.places.name}
 				<input type="text" id="name" />	<br />
-				<textfield>place</textfield>
-				<select id="place" selected={this.state.places.id}>
-					{options}
-				</select> <br />
 				<button onClick={this.save}>SAVE</button>	
 				<button >CANCEL</button>	
 			</div>

@@ -49,9 +49,10 @@ var PlaceAdd = React.createClass({
 			);
 		});
 		return(
-			<div>
-				<textfield>name</textfield>
-				<input id="name"/> <br />
+			<div className="sm-container edit-form">
+				<h2 className="text-center">Add Places</h2>
+				<textfield>Name</textfield>
+				<input id="name"/>	<br />
 				<button onClick={this.save}>SAVE</button>	
 				<button >CANCEL</button>	
 			</div>

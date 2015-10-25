@@ -56,7 +56,7 @@ var WorldList = React.createClass({
 						{foo}
 					</ul>
 					<input type="text" name="name" id="worldName"/>
-					<button onClick={this.create} >new world</button>
+					<button onClick={this.create} >New World</button>
 				</div>
 	    	</div>
 	    )

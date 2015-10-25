@@ -13,6 +13,7 @@ var NavBar = React.createClass({
     				</span>
     				<a className="nav-text" href="worldList.html">Worlds</a>
     				<a className="nav-text" href="character.html">Characters</a>
+    				<a className="nav-text" href="places.html">Places</a>
     			</div>
     		</div>
     	);
