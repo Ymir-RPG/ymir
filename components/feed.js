@@ -1,7 +1,13 @@
 var React = require('react');
 
-module.exports = React.createClass({
+var OverviewFeed = React.createClass({
     render: function() {
-        return "hi!"
+        return (
+        	<div className = "seven columns overview-feed">
+        		{this.props.children}
+        	</div>
+        );
     }
 });
+
+module.exports = OverviewFeed;
