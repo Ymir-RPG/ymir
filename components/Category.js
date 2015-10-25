@@ -16,6 +16,8 @@ function getCookie(cname) {
     return "";
 }
 
+
+
 var Category = React.createClass({
 	getInitialState: function(){
 	    return {worlds:[]}
@@ -31,12 +33,18 @@ var Category = React.createClass({
 	    });
 	},
 
+	cookieFunction: function(id) {
+		document.cookie = "characterEditId="+id;
+		location.href=this.props.category+"Edit.html"
+	},
+
 	render: function(){
+		var self = this;
 		var items = this.state.worlds.map((i,n)=>{
 			return(
 				<li key={n}>
 					<a className="name">{i.id}: {i.name}</a>
-					<a href={this.props.category} onClick={this.cookieFunction(i.id)}> | edit </a>
+					<a onClick={function(){alert('asdf');self.cookieFunction(i.id)}}> | edit </a>
 					<a>| delete </a>
 				</li>
 			);
@@ -52,9 +60,7 @@ var Category = React.createClass({
 	    )
 	},
 
-	cookieFunction: function(id) {
-		document.cookie = id;
-	}
+
 })
 
 module.exports = Category;
