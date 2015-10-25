@@ -9,6 +9,17 @@ from ymir.db import session
 from ymir import app
 
 
+def _get_request_data(request):
+    results = {}
+    results.update(request.args)
+    results.update(request.form)
+    try:
+        results.update(json.loads(request.get_data()))
+    except ValueError:
+        pass
+    return results
+
+
 @app.route("/worlds", methods=["GET"])
 def worlds_get():
     return json.dumps([i.to_dict() for i in session.query(World).all()])
@@ -16,7 +27,8 @@ def worlds_get():
 
 @app.route("/worlds", methods=["POST"])
 def worlds_post():
-    name = request.args.get("name", None) or request.form.get("name", None)
+    data = _get_request_data(request)
+    name = data["name"]
     session.add(World(name=name))
     session.commit()
     return ('', 204)
@@ -33,7 +45,8 @@ def world_id_get(world_id):
 
 @app.route("/worlds/<world_id>", methods=["PUT"])
 def world_id_put(world_id):
-    name = request.args.get("name", None) or request.form.get("name", None)
+    data = _get_request_data(request)
+    name = data["name"]
     world = session.query(World).filter(World.id == world_id).one()
     world.name = name
     session.commit()
@@ -59,7 +72,8 @@ def characters_get(world_id):
 
 @app.route("/worlds/<world_id>/characters", methods=["POST"])
 def characters_post(world_id):
-    name = request.args.get("name", None) or request.form.get("name", None)
+    data = _get_request_data(request)
+    name = data["name"]
     character = Character(name=name, world_id=world_id)
     session.add(character)
     session.commit()
@@ -77,13 +91,13 @@ def character_id_get(world_id, character_id):
 
 @app.route("/worlds/<world_id>/characters/<character_id>", methods=["PUT"])
 def character_name_put(world_id, character_id):
+    data = _get_request_data(request)
     try:
         character = session.query(Character).filter(
             and_(Character.world_id == world_id, Character.id == character_id)).one()
     except NoResultFound:
         abort(404)
-    if request.args.get("name", None) or request.form.get("name", None):
-        character.name = request.args.get("name", None) or request.form.get("name", None)
+    character.name = data.get("name", character.name)
     session.commit()
     # TODO(Skyler): If there is no change, we should return a different status
     return json.dumps(character.to_dict())
@@ -110,7 +124,8 @@ def places_get(world_id):
 
 @app.route("/worlds/<world_id>/places", methods=["POST"])
 def places_post(world_id):
-    name = request.args.get("name", None) or request.form.get("name", None)
+    data = _get_request_data(request)
+    name = data["name"]
     place = Place(name=name, world_id=world_id)
     session.add(place)
     session.commit()
@@ -128,13 +143,13 @@ def places_id_get(world_id, places_id):
 
 @app.route("/worlds/<world_id>/places/<place_id>", methods=["PUT"])
 def places_name_put(world_id, place_id):
+    data = _get_request_data(request)
     try:
         place = session.query(Place).filter(
             and_(Place.world_id == world_id, Place.id == place_id)).one()
     except NoResultFound:
         abort(404)
-    if request.args.get("name", None) or request.form.get("name", None):
-        place.name = request.args.get("name", None) or request.form.get("name", None)
+    place.name = data.get("name", place.name)
     session.commit()
     # TODO(Skyler): If there is no change, we should return a different status
     return json.dumps(place.to_dict())
