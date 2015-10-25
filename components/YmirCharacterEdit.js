@@ -21,7 +21,7 @@ var CharacterEdit = React.createClass({
 	},
 	componentDidMount: function(){
 	    var self = this;
-	    Model.Worlds.all().then(function(res){
+	    Model.Places.all().then(function(res){
 	    	console.log(res.data);
 	        var st=self.state;
 	        st.places = res.data;
