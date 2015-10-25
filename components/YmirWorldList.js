@@ -51,12 +51,12 @@ var WorldList = React.createClass({
 					<br />
 					<br />
 					<br />	
-					<h1 className="center">Campaign Settings</h1>
+					<h1 className="center">Choose Your World</h1>
 					<ul>
 						{foo}
 					</ul>
-					<input type="text" name="name" id="worldName"/> <br />
-					<button onClick={this.create} >New World</button>
+					<input type="text" name="name" id="worldName" style={{width: "100%"}}/> <br />
+					<button onClick={this.create} className="text-center" style={{width: "100%"}}>New World</button>
 				</div>
 	    	</div>
 	    )
