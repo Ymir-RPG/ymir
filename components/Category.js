@@ -25,7 +25,8 @@ var Category = React.createClass({
 
 	componentDidMount: function(){
 	    var self = this;
-	    Model(getCookie('worldId'))['Characters'].all().then(function(res){
+	    var context = this.props.category;
+	    Model(getCookie('worldId'))[context].all().then(function(res){
 	    	console.log(res);
 	        var st=self.state;
 	        st.worlds = res.data;
@@ -34,7 +35,7 @@ var Category = React.createClass({
 	},
 
 	rm: function(id){
-		Model(getCookie('worldId'))['Characters'].del(id).then(function(res){
+		Model(getCookie('worldId'))[context].del(id).then(function(res){
 			console.log(res);
 		});
 		location.reload()
