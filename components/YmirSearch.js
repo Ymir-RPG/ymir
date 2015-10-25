@@ -6,7 +6,7 @@ var ymirAPI =require('../static/js/ymirWrapper.js');
 var Model = ymirAPI(1);
 
 
-var Search = React.createClass({
+var WorldList = React.createClass({
 	getInitialState: function(){
 	    return {worlds:[]}
 	},
@@ -14,7 +14,6 @@ var Search = React.createClass({
 	componentDidMount: function(){
 	    var self = this;
 	    Model.Worlds.all().then(function(res){
-	        console.log(res.data)
 	        var st=self.state;
 	        st.worlds = res.data;
 	        self.setState(st);
@@ -22,13 +21,24 @@ var Search = React.createClass({
 	},
 
 	render: function(){
+		var foo = this.state.worlds.map(function(i){
+			return(
+				<li> {i.id}: {i.name}</li>
+			);
+		});
 	    return(
-	    	<div> search! </div>
+	    	<div>
+				<NavBar />	    		
+				<h1>WorldList </h1>
+				<ul>
+					{foo}
+				</ul>
+	    	</div>
 	    )
 	}
 })
 
 ReactDOM.render(
-  <Search/>,
+  <WorldList/>,
   document.getElementById('react')
 );
