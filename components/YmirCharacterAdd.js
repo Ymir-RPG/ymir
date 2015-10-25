@@ -40,6 +40,7 @@ var CharacterEdit = React.createClass({
 		var name = document.getElementById('name').value;
 		var place =document.getElementById('place').value;
 		Model.Characters.create({name:name, placeId:place})
+		location.reload()
 	},
 	render:function(){
 		var options = this.state.worlds.map((i,n)=>{

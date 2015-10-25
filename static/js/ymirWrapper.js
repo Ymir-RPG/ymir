@@ -16,9 +16,8 @@ var resource = function(resource){
 			return axios.get(urlify(resource))
 		},
 		findOne: function(id){
-			return axios.get(urlify(resource), {params: {
-     			 ID: id
-    		}})
+			resource.push(id)
+			return axios.get(urlify(resource))
 		},
 		create: function(data){
 			return axios.post(urlify(resource), data)

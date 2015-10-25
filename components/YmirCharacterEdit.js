@@ -29,17 +29,20 @@ var CharacterEdit = React.createClass({
 	    }).catch(function(res){
 	    	console.log(res)
 	    });
-	    if(this.props.id){
-	    	Model.Characters.findOne(this.props.id).then(function(res){
-	    		console.log(res);
-	    	})
-	    }
-	   
+
+		Model.Characters.findOne(this.props.id).then(function(res){
+			console.log(res.data);
+		    var st=self.state;
+		    st.ch = res.data;
+		    self.setState(st);
+		    document.getElementById('name').value = st.ch.name;
+		})
 	},
 	save: function(){
 		var name = document.getElementById('name').value;
 		var place =document.getElementById('place').value;
-		Model.Characters.create({name:name, placeId:place})
+		Model.Characters.update({name:name, placeId:place})
+		location.reload()
 	},
 	render:function(){
 		var options = this.state.worlds.map((i,n)=>{
@@ -50,9 +53,10 @@ var CharacterEdit = React.createClass({
 		return(
 			<div>
 				<textfield>name</textfield>
-				<input id="name"/>	<br />
+				{this.state.ch.name}
+				<input type="text" id="name" />	<br />
 				<textfield>place</textfield>
-				<select id="place">
+				<select id="place" selected={this.state.ch.id}>
 					{options}
 				</select> <br />
 				<button onClick={this.save}>SAVE</button>	
@@ -65,7 +69,7 @@ var CharacterEdit = React.createClass({
 ReactDOM.render(
   <div>
   	<NavBar />
-  	<CharacterEdit />
+  	<CharacterEdit id={getCookie("characterEditId")} />
   </div>,
   document.getElementById('react')
 );

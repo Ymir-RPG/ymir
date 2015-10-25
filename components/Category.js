@@ -33,6 +33,13 @@ var Category = React.createClass({
 	    });
 	},
 
+	rm: function(id){
+		Model(getCookie('worldId'))['Characters'].del(id).then(function(res){
+			console.log(res);
+		});
+		location.reload()
+	},
+
 	cookieFunction: function(id) {
 		document.cookie = "characterEditId="+id;
 		location.href=this.props.category+"Edit.html"
@@ -44,8 +51,8 @@ var Category = React.createClass({
 			return(
 				<li key={n}>
 					<a className="name">{i.id}: {i.name}</a>
-					<a onClick={function(){alert('asdf');self.cookieFunction(i.id)}}> | edit </a>
-					<a>| delete </a>
+					<a onClick={function(){self.cookieFunction(i.id)}}> | edit </a>
+					<a onClick={self.rm.bind(this,i.id)}>| delete </a>
 				</li>
 			);
 		});
