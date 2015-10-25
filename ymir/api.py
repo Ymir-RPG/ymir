@@ -48,21 +48,25 @@ def world_id_delete(world_id):
         abort(404)
     session.delete(world)
     session.commit()
+    return ('', 204)
 
 
 @app.route("/worlds/<world_id>/characters", methods=["GET"])
 def characters_get(world_id):
-    world = session.query(World).filter(World.id == world_id).one()
-    return json.dumps(
-        [i.to_dict() for i in session.query(
-            Character).filter(Character.world_id == world.id).all()])
+    try:
+        return json.dumps([i.to_dict() for i in session.query(
+            Character).filter(Character.world_id == world_id).all()])
+    except NoResultFound:
+        abort(404)
 
 
 @app.route("/worlds/<world_id>/characters", methods=["POST"])
 def characters_post(world_id):
     name = request.args["name"]
-    session.add(Character(name=name, world_id=world_id))
+    character = Character(name=name, world_id=world_id)
+    session.add(character)
     session.commit()
+    return json.dumps(character.to_dict())
 
 
 @app.route("/worlds/<world_id>/characters/<character_id>", methods=["GET"])
@@ -76,11 +80,16 @@ def character_id_get(world_id, character_id):
 
 @app.route("/worlds/<world_id>/characters/<character_id>", methods=["PUT"])
 def character_name_put(world_id, character_id):
-    character = session.query(Character).filter(
-        and_(Character.world_id == world_id, Character.id == character_id)).one()
+    try:
+        character = session.query(Character).filter(
+            and_(Character.world_id == world_id, Character.id == character_id)).one()
+    except NoResultFound:
+        abort(404)
     if request.args["name"]:
         character.name = request.args["name"]
     session.commit()
+    # TODO(Skyler): If there is no change, we should return a different status
+    return json.dumps(character.to_dict())
 
 
 @app.route("/worlds/<world_id>/characters/<character_id>",
