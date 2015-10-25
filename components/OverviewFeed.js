@@ -25,13 +25,13 @@ var OverviewFeed = React.createClass({
 	componentDidMount: function(){
 	    var self = this;
 	    var world = Model(getCookie('worldId'));
-	    world['Characters'].all().then(function(res){
+	    world['Characters'].chrono().then(function(res){
 	    	console.log(res);
 	        var st=self.state;
 	        st.people = res.data;
 	        self.setState(st);
 	    });
-	    world['Places'].all().then(function(res){
+	    world['Places'].chrono().then(function(res){
 	    	console.log(res);
 	        var st=self.state;
 	        st.places = res.data;
@@ -40,13 +40,28 @@ var OverviewFeed = React.createClass({
 	},
 
     render: function() {
+    	var mappedPeople = this.state.people.map((i,n)=>{
+			return(
+				<li key={n}>
+					<a className="name">{i.name}</a>
+				</li>
+			);
+		});
+    	var mappedPlaces = this.state.places.map((i,n)=>{
+			return(
+				<li key={n}>
+					<a className="place">{i.name}</a>
+				</li>
+			);
+		});
+
         return (
         	<div className = "eight columns overview-feed">
         		<div className = "one-half column">
-        			Some garbage here
+        			{mappedPeople}
         		</div>
         		<div className = "one-half column">
-        			Some garbage there
+        			{mappedPlaces}
         		</div>
         	</div>
         );
