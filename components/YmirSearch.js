@@ -39,6 +39,8 @@ var Search = React.createClass({
 })
 
 ReactDOM.render(
-  <Search  />,
+  <div>
+  	<NavBar />
+  </div>,
   document.getElementById('react')
 );
