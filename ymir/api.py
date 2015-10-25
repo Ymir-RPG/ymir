@@ -75,8 +75,8 @@ def world_id_delete(world_id):
 def characters_get(world_id):
     data = _get_request_data(request)
     query = session.query(Character).filter(Character.world_id == world_id)
-    if "place_id" in data:
-        query = query.filter(Character.place_id == data["place_id"])
+    if "placeId" in data:
+        query = query.filter(Character.place_id == data["placeId"])
     return json.dumps([i.to_dict() for i in query.all()])
 
 
@@ -85,8 +85,8 @@ def characters_post(world_id):
     data = _get_request_data(request)
     name = data["name"]
     character = Character(name=name, world_id=world_id)
-    if "place_id" in data:
-        character.place_id = data["place_id"]
+    if "placeId" in data:
+        character.place_id = data["placeId"]
     session.add(character)
     session.commit()
     return json.dumps(character.to_dict())
@@ -96,7 +96,8 @@ def characters_post(world_id):
 def character_id_get(world_id, character_id):
     try:
         return json.dumps(session.query(Character).filter(and_(
-            Character.world_id == world_id, Character.id == character_id)).one().to_dict())
+            Character.world_id == world_id,
+            Character.id == character_id)).one().to_dict())
     except NoResultFound:
         abort(404)
 
