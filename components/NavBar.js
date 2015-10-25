@@ -11,7 +11,6 @@ var NavBar = React.createClass({
     						Ymir RPG
     					</a>
     				</span>
-    				<a className="nav-text" href="places.html">Places</a>
     				<a className="nav-text" href="character.html">Characters</a>
     				<a className="nav-text" href="places.html">Places</a>
     			</div>
