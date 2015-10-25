@@ -200,7 +200,7 @@ def places_name_delete(world_id, place_id):
 
 
 @app.route("/worlds/<world_id>/items", methods=["GET"])
-def item_get(world_id):
+def items_get(world_id):
     data = _get_request_data(request)
     query = session.query(Item).filter(Item.world_id == world_id)
     if data.get('chronological', False):
@@ -251,7 +251,7 @@ def item_put(world_id, item_id):
     item.last_updated = datetime.now()
     session.commit()
     # TODO(Skyler): If there is no change, we should return a different status
-    return json.dumps(character.to_dict())
+    return json.dumps(item.to_dict())
 
 
 @app.route("/worlds/<world_id>/items/<item_id>", methods=["DELETE"])
