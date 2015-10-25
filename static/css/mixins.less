@@ -1,0 +1,80 @@
+// Created by Jeff. June-August, 2015.
+// Contents: Box, Border, Colors, Text, Other
+// If you think a custom one should be here, check near the module/layout itself.
+
+@import "variables-skin";
+@import "variables-structure";
+@import "mixins";
+
+// Box
+.rounded(@radius: 10px) when (ispixel(@radius)) {
+  -webkit-border-radius:  @radius;
+  -moz-border-radius:     @radius;
+  border-radius:          @radius;
+}
+
+// Because I forget which order the official ones are.
+// Up, down, left, right.
+.margin(@top, @bottom, @left, @right) {
+  margin-top: @top;
+  margin-bottom: @bottom;
+  margin-left: @left;
+  margin-right: @right;
+}
+
+// Because I forget which order the official ones are.
+// Up, down, left, right.
+.padding(@top, @bottom, @left, @right) {
+  padding-top: @top;
+  padding-bottom: @bottom;
+  padding-left: @left;
+  padding-right: @right;
+}
+
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  -moz-box-shadow:    @style @c;
+  -webkit-box-shadow: @style @c;
+  box-shadow:         @style @c;
+}
+
+
+// Border
+.border-box() {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing:     border-box;
+  box-sizing:         border-box;
+}
+
+
+// Colors
+// Nothing!
+
+
+// Text
+// .monospace() {
+//   font-family: @monospace-fonts;
+// }
+
+// .sans-serif() {
+//   font-family: @sans-serif-fonts;
+// }
+
+// .serif() {
+//   font-family: @serif-fonts;
+// }
+
+.fully-center-text(@height) when (ispixel(@height)) {
+  line-height:    @height;
+  height:         @height;
+  text-align:     center;
+}
+
+.vert-center-text(@height) when (ispixel(@height)) {
+  line-height:    @height;
+  height:         @height;
+  // Don't text align center, that's what .fully-center-text() is for.
+}
+
+// Other
+// Nothing!
