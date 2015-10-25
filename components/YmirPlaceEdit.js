@@ -30,7 +30,7 @@ var PlaceEdit = React.createClass({
 	    	console.log(res)
 	    });
 
-		Model.Characters.findOne(this.props.id).then(function(res){
+		Model.Places.findOne(this.props.id).then(function(res){
 			console.log(res.data);
 		    var st=self.state;
 		    st.places = res.data;
