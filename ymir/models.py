@@ -29,12 +29,15 @@ class Character(Base):
     name = Column(String)
     world_id = Column(Integer, ForeignKey("worlds.id"))
     world = relationship("World", backref=backref("characters", order_by=id))
+    place_id = Column(Integer, ForeignKey("places.id"))
+    place = relationship("Place", backref=backref("characters", order_by=id))
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
             "world_id": self.world_id,
+            "place_id": self.place_id,
         }
 
     def __repr__(self):
