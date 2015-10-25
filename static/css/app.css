@@ -912,6 +912,9 @@ ul.list {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+ul.list {
+  list-style: none;
+}
 ul.list li {
   border-bottom: 1px solid #CCC;
   padding-top: 1rem;
