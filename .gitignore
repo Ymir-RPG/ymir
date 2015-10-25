@@ -129,3 +129,6 @@ Session.vim
 [Ss]cripts
 pyvenv.cfg
 pip-selfcheck.json
+
+## Node Package Manager
+/node_modules
