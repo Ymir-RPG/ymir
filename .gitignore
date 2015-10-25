@@ -132,3 +132,5 @@ pip-selfcheck.json
 
 ## Node Package Manager
 /node_modules
+
+local.sqlite
