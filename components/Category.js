@@ -35,8 +35,8 @@ var Category = React.createClass({
 	},
 
 	rm: function(id){
-		Model(getCookie('worldId'))[this.props.category].del(id).then(function(res){
-			console.log("successfully deleted");
+	    var context = this.props.category;
+		Model(getCookie('worldId'))[context].del(id).then(function(res){
 			console.log(res);
 		});
 		location.reload()
@@ -54,7 +54,7 @@ var Category = React.createClass({
 				<li key={n}>
 					<a className="name">{i.name}</a>
 					<a className="button sm-button" onClick={function(){self.cookieFunction(i.id)}}>edit</a>
-					<a className="button sm-button" onClick={self.rm(i.id)}>delete</a>
+					<a className="button sm-button" onClick={self.rm(.bind(this,)i.id)}>delete</a>
 				</li>
 			);
 		});
