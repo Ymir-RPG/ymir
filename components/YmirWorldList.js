@@ -28,7 +28,7 @@ var WorldList = React.createClass({
 		console.log(id);
 		document.cookie="worldId="+id;
 		console.log(document.cookie);
-		location.href="search.html";
+		location.href="character.html";
 	},
 
 	create: function(){
