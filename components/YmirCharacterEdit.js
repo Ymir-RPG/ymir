@@ -17,14 +17,14 @@ function getCookie(cname) {
 
 var CharacterEdit = React.createClass({
 	getInitialState: function(){
-	    return {worlds:[], ch:{}}
+	    return {places:[], ch:{}}
 	},
 	componentDidMount: function(){
 	    var self = this;
 	    Model.Worlds.all().then(function(res){
 	    	console.log(res.data);
 	        var st=self.state;
-	        st.worlds = res.data;
+	        st.places = res.data;
 	        self.setState(st);
 	    }).catch(function(res){
 	    	console.log(res)
@@ -45,7 +45,7 @@ var CharacterEdit = React.createClass({
 		location.reload()
 	},
 	render:function(){
-		var options = this.state.worlds.map((i,n)=>{
+		var options = this.state.places.map((i,n)=>{
 			return(
 				<option key={i.id} value={i.id}>{i.name}</option>
 			);
