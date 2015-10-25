@@ -36,6 +36,8 @@ var PlaceEdit = React.createClass({
 		    st.places = res.data;
 		    self.setState(st);
 		    document.getElementById('name').value = st.places.name;
+		}).catch(function(res){
+			console.log(res, "thisthisthis");
 		})
 	},
 	save: function(){
