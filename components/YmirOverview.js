@@ -1,24 +1,8 @@
 "use strict";
-
-var NavBar = React.createClass({
-
-    render: function() {
-        return React.createElement('div', {className: "top-nav"}, this.props.children);
-    }
-});
-
-var TableOfContents = React.createClass({
-
-    render: function() {
-        return React.createElement('div', {className: "three columns table-of-contents"}, this.props.children);
-    }
-});
-
-var Feed = React.createClass({
-    render: function() {
-        return "hi!"
-    }
-});
+var React = require('react');
+var ReactDOM = require('react-dom');
+var NavBar = require('navbar.js');
+var TableOfContents = require('tableofcontents.js');
 
 var YmirOverview = React.createClass({
 
