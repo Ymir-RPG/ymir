@@ -40,7 +40,7 @@ var PlaceEdit = React.createClass({
 	},
 	save: function(){
 		var name = document.getElementById('name').value;
-		Model.Characters.update({name:name})
+		Model.Places.update({name:name})
 		location.reload()
 	},
 	render:function(){
