@@ -35,6 +35,7 @@ var WorldList = React.createClass({
 		Model.Worlds.create({name:document.getElementById('worldName').value}).then(function(res){
 			console.log(res);
 		});
+		location.reload();
 	},
 
 	render: function(){
@@ -46,8 +47,11 @@ var WorldList = React.createClass({
 	    return(
 	    	<div>
 				<NavBar />
-				<div className="container">		
-					<h1>WorldList </h1>
+				<div className="sm-container">	
+					<br />
+					<br />
+					<br />	
+					<h1 className="center">WorldList </h1>
 					<ul>
 						{foo}
 					</ul>

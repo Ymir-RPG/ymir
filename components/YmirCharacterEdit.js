@@ -51,16 +51,15 @@ var CharacterEdit = React.createClass({
 			);
 		});
 		return(
-			<div>
-				<textfield>name</textfield>
-				{this.state.ch.name}
+			<div className="sm-container edit-form">
+				<textfield>name</textfield> <br />
 				<input type="text" id="name" />	<br />
-				<textfield>place</textfield>
+				<textfield>place</textfield> <br />
 				<select id="place" selected={this.state.ch.id}>
 					{options}
 				</select> <br />
 				<button onClick={this.save}>SAVE</button>	
-				<button >CANCEL</button>	
+				<button onClick={window.back}>CANCEL</button>	
 			</div>
 		)
 	}

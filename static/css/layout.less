@@ -20,10 +20,24 @@
 	.border-box();
 }
 
+.sm-container{
+	width: 30%;
+	margin:auto;
+}
+.sm-button{
+	line-height: 3rem !important;
+	height: 3rem !important;
+}
+
+.center{
+	text-align:center;
+}
+
 .header{
 	background: #E4E4E4;
     line-height: 12rem;
     height: 12rem;
+    overflow: hidden;
 }
 
 .header input{
@@ -44,7 +58,7 @@ a.name{
 }
 
 ul.list{
-	margin-top:1rem;
+	margin-top:3rem;
 	margin-bottom:1rem;
 }
 ul.list{
@@ -54,9 +68,26 @@ ul.list li{
 	border-bottom: 1px solid #CCC;
 	padding-top:1rem;
 	margin-top:-1rem;
+	overflow: auto;
+	width: 100%;
 }
+
+ul.list li .button{
+	float:right;
+}
+
 ul.list li:nth-child(even){
 	background: rgba(204, 204, 204, 0.29);;
+}
+
+.edit-form{
+	margin-top:3rem;
+}
+.edit-form input, .edit-form select{
+	width:100%;
+}
+.edit-form a, .edit-form button{
+	width:50%;
 }
 
 
