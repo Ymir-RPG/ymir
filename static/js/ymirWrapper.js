@@ -1,22 +1,34 @@
 "use strict";
 
+var URL = "http://127.0.0.1:2841";
+
 if (typeof(module) !== 'undefined') {
     var axios = require('axios');
 }
 
 var urlify = function(arr){
-	return arr.map(function(el){return "/"+el}).join("");
+	return URL + arr.map(function(el){return "/"+el}).join("");
 }
 
 var resource = function(resource){
 	return {
 		all: function(){
-			return axios.get(urlify([resource]))
+			return axios.get(urlify(resource))
 		},
 		findOne: function(id){
-			return axios.get(urlify([resource]), {params: {
+			return axios.get(urlify(resource), {params: {
      			 ID: id
     		}})
+		},
+		create: function(data){
+			return axios.post(urlify(resource), data)
+		},
+		update: function(data){
+			return axios.put(urlify(resource), data)
+		},
+		del: function(data){
+			resource.push(data)
+			return axios.delete(urlify(resource))
 		}
 	};
 }
@@ -26,30 +38,37 @@ var ymirAPI = function(world){
 		world: world
 	};
 
-	model.world = function(){
+	model.getWorld = function(){
 		return model.world;
 	}
 
 	model.Worlds = function(){
-		return axios.get('/worlds')
+		return axios.get(urlify(['worlds']))
 	}
 
-	model.Characters = resource('characters');
-	model.Places     = resource('places');
+	model.Worlds     = resource(['worlds']);
+	model.Characters = resource(['worlds', model.world , 'characters']);
+	model.Places     = resource(['worlds', model.world , 'places']);
 
 	return model;
 }
 
-var Model = ymirAPI('middel_earth');
-Model.Worlds().then(function(res){
-	console.log(res);
-});
+if (typeof(module) !== 'undefined') {
+	module.exports = ymirAPI;
+}
 
 
-axios.get('http://ymirrpg.com/worlds').then(function(res){
-	console.log(res);
-})
+// example
+var Model = ymirAPI(1);
 
-// Model.Characters.all().then(function(res){
+// var query = Model.Worlds.create({name:'Thedas'});
+// // var query = Model.Characters.create({name:'Joe'});
+// // // var query = Model.Worlds.del(9);
+// // // var query = Model.Worlds.all();
+
+
+// query.then(function(res){
 // 	console.log(res);
+// }).catch(function(response){
+// 	console.log(response.data);
 // });

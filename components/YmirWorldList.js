@@ -12,12 +12,15 @@ var WorldList = React.createClass({
 	},
 
 	componentDidMount: function(){
+		console.log('asdfsad');
 	    var self = this;
 	    Model.Worlds.all().then(function(res){
-	    	console.log(res.data)
+	    	console.log(res.data);
 	        var st=self.state;
 	        st.worlds = res.data;
 	        self.setState(st);
+	    }).catch(function(res){
+	    	console.log(res)
 	    })
 	},
 
@@ -41,6 +44,9 @@ var WorldList = React.createClass({
 				<ul>
 					{foo}
 				</ul>
+				<form method="post" action="http://127.0.0.1:2841/worlds">
+					<input type="text" name="name" />
+				</form>
 	    	</div>
 	    )
 	}
