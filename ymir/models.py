@@ -82,10 +82,10 @@ class Item(Base):
     name = Column(String)
     world_id = Column(Integer, ForeignKey("worlds.id"))
     world = relationship("World", backref=backref("items", order_by=id))
-    place_id = Column(Integer, ForeignKey("items.id"))
+    place_id = Column(Integer, ForeignKey("places.id"))
     place = relationship("Place", backref=backref("items", order_by=id))
     character_id = Column(Integer, ForeignKey("characters.id"))
-    place = relationship("Place", backref=backref("items", order_by=id))
+    character = relationship("Character", backref=backref("items", order_by=id))
     last_updated = Column(DateTime)
 
     def to_dict(self):
