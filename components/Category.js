@@ -15,7 +15,7 @@ function getCookie(cname) {
     return "";
 }
 
-var Catagory = React.createClass({
+var Category = React.createClass({
 	getInitialState: function(){
 	    return {worlds:[]}
 	},
@@ -42,12 +42,12 @@ var Catagory = React.createClass({
 		});
 	    return(
 	    	<div>
-				<h1>{this.props.catagory} <a>+</a> </h1>
+				<h1>{this.props.category} <a>+</a> </h1>
 				{foo}
 	    	</div>
 	    )
 	}
 })
 
-module.exports = Catagory;
+module.exports = Category;
 

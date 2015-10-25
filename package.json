@@ -6,7 +6,10 @@
   "dependencies": {
     "babelify": "~6.4.0",
     "browserify": "~11.2.0",
-    "watchify": "~3.4.0"
+    "watchify": "~3.4.0",
+    "react-dom": "~0.14.0",
+    "react": "~0.14.0",
+    "axios": "~0.7.0"
   },
   "devDependencies": {},
   "scripts": {

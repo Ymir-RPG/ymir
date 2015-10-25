@@ -2,13 +2,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var NavBar = require('./NavBar');
-var Catagory = require('./Catagory');
+var Category = require('./Category');
 
 
 ReactDOM.render(
   <div>
   	<NavBar />
-  	<Catagory catagory={'Characters'}/>
+  	<Category category={'Characters'}/>
   </div>,
   document.getElementById('react')
 );
