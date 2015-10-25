@@ -36,7 +36,7 @@ var Category = React.createClass({
 			return(
 				<li key={n}>
 					<a className="name">{i.id}: {i.name}</a>
-					<a> | edit </a>
+					<a href={"CharactersEdit.html?id="+i.id} > | edit </a>
 					<a>| delete </a>
 				</li>
 			);
