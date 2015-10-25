@@ -31,6 +31,12 @@ var WorldList = React.createClass({
 		location.href="search.html";
 	},
 
+	create: function(){
+		Model.Worlds.create({name:document.getElementById('worldName').value}).then(function(res){
+			console.log(res);
+		});
+	},
+
 	render: function(){
 		var foo = this.state.worlds.map((i,n)=>{
 			return(
@@ -44,9 +50,8 @@ var WorldList = React.createClass({
 				<ul>
 					{foo}
 				</ul>
-				<form method="post" action="http://127.0.0.1:2841/worlds">
-					<input type="text" name="name" />
-				</form>
+				<input type="text" name="name" id="worldName"/>
+				<button onClick={this.create} >new world</button>
 	    	</div>
 	    )
 	}
