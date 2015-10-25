@@ -50,7 +50,7 @@ var CharacterEdit = React.createClass({
 			);
 		});
 		return(
-			<div>
+			<div className="sm-container edit-form">
 				<textfield>name</textfield>
 				<input id="name"/>	<br />
 				<textfield>place</textfield>

@@ -57,6 +57,7 @@ var OverviewFeed = React.createClass({
 
         return (
         	<div className = "eight columns overview-feed">
+        		{this.props.children}
         		<div className = "one-half column">
         			{mappedPeople}
         		</div>

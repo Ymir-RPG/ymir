@@ -59,7 +59,7 @@ var CharacterEdit = React.createClass({
 					{options}
 				</select> <br />
 				<button onClick={this.save}>SAVE</button>	
-				<button onClick={window.back}>CANCEL</button>	
+				<a className="button" href="Character.html">CANCEL</a>	
 			</div>
 		)
 	}

@@ -13,15 +13,17 @@ var YmirOverview = React.createClass({
             <div>
                 <NavBar />
                 <div className="container"> 
+                    <br />
                     <h1 className="text-center">Ymir RPG Campaign Manager</h1>
+                    <br />
                     <TableOfContents>
-                        <h4 className="text-center">Table of Contents</h4>
+                        <h5 className="text-center">Catagories</h5>
                         <a href="character.html">Character</a>
                         <br/>
                         <a href="places.html">Places</a>
                     </TableOfContents>
                     <OverviewFeed>
-                        <h3 className="text-center">FEED</h3>
+                        <h4>Recent changes</h4>
                     </OverviewFeed>
                 </div>
             </div>
