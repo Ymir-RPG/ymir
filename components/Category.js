@@ -4,6 +4,7 @@ var ReactDOM = require('react-dom');
 var ymirAPI =require('../static/js/ymirWrapper.js');
 var Model = ymirAPI;
 
+
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -27,23 +28,26 @@ var Category = React.createClass({
 	        var st=self.state;
 	        st.worlds = res.data;
 	        self.setState(st);
-	    })
+	    });
 	},
 
 	render: function(){
-		var foo = this.state.worlds.map((i,n)=>{
+		var items = this.state.worlds.map((i,n)=>{
 			return(
 				<li key={n}>
-					<a>{i.id}: {i.name}</a>
+					<a className="name">{i.id}: {i.name}</a>
 					<a> | edit </a>
 					<a>| delete </a>
 				</li>
 			);
 		});
 	    return(
-	    	<div>
+	    	<div id="CAT">
 				<h1>{this.props.category} <a href={this.props.category + "Edit.html"}>+</a> </h1>
-				{foo}
+				<input className="search" placeholder="Search" />
+				<ul className="list">
+					{items}
+				</ul>
 	    	</div>
 	    )
 	}
