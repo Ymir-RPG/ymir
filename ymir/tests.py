@@ -6,6 +6,7 @@ import unittest
 import json
 from os import remove
 from uuid import uuid4
+import time
 
 from ymir import api
 from ymir import app
@@ -28,18 +29,44 @@ class TestApi(unittest.TestCase):
     def test_worlds(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         result = json.loads(self.client.get("/worlds").get_data())
-        self.assertEqual([{"id": 1, "name": "middle-earth"}], result)
+        self.assertEqual(1, result[0]["id"])
+        self.assertEqual("middle-earth", result[0]["name"])
+        self.assertNotEqual(None, result[0]["lastUpdated"])
+
+    def test_chronological(self):
+        self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
+        self.client.post("/worlds", data=json.dumps({"name": "edge-earth"}))
+        result = json.loads(self.client.get(
+            "/worlds", data=json.dumps({"chronological": True})).get_data())
+        self.assertEqual(2, result[0]["id"])
+        self.assertEqual(1, result[1]["id"])
+        self.client.put("/worlds/1", data=json.dumps({"name": "earth2"}))
+        result = json.loads(self.client.get(
+            "/worlds", data=json.dumps({"chronological": True})).get_data())
+        self.assertEqual(1, result[0]["id"])
+        self.assertEqual(2, result[1]["id"])
 
     def test_get_world_by_id(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         result = json.loads(self.client.get("/worlds/1").get_data())
-        self.assertEqual({"id": 1, "name": "middle-earth"}, result)
+        self.assertEqual(1, result["id"])
+        self.assertEqual("middle-earth", result["name"])
+        self.assertIn("lastUpdated", result)
 
     def test_update_world(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         self.client.put("/worlds/1", data=json.dumps({"name": "edge-earth"}))
         result = json.loads(self.client.get("/worlds/1").get_data())
-        self.assertEqual({"id": 1, "name": "edge-earth"}, result)
+        self.assertEqual(1, result["id"])
+        self.assertEqual("edge-earth", result["name"])
+
+    def test_last_updated(self):
+        self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
+        original = json.loads(self.client.get("/worlds/1").get_data())
+        time.sleep(1)
+        self.client.put("/worlds/1", data=json.dumps({"name": "edge-earth"}))
+        result = json.loads(self.client.get("/worlds/1").get_data())
+        self.assertNotEqual(original["lastUpdated"], result["lastUpdated"])
 
     def test_delete_world(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
@@ -56,25 +83,28 @@ class TestApi(unittest.TestCase):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         self.client.post("/worlds/1/characters", data=json.dumps({"name": "Donald Trump"}))
         result = json.loads(self.client.get("/worlds/1/characters").get_data())
-        self.assertEqual([
-            {"id": 1, "name": "Donald Trump", "world_id": 1, "place_id": None}],
-            result)
+        self.assertEqual("Donald Trump", result[0]["name"])
+        self.assertEqual(1, result[0]["worldId"])
+        self.assertEqual(None, result[0]["placeId"])
+        self.assertIn("lastUpdated", result[0])
 
     def test_get_character(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         self.client.post("/worlds/1/characters", data=json.dumps({"name": "Donald Trump"}))
         result = json.loads(self.client.get("/worlds/1/characters/1").get_data())
-        self.assertEqual(
-            {"id": 1, "name": "Donald Trump", "world_id": 1, "place_id": None},
-            result)
+        self.assertEqual("Donald Trump", result["name"])
+        self.assertEqual(1, result["worldId"])
+        self.assertEqual(None, result["placeId"])
+        self.assertIn("lastUpdated", result)
 
     def test_put_character(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         self.client.post("/worlds/1/characters", data=json.dumps({"name": "Donald Trump"}))
         result = json.loads(self.client.put("/worlds/1/characters/1", data=json.dumps({"name": "Barack Obama"})).get_data())
-        self.assertEqual(
-            {"id": 1, "name": "Barack Obama", "world_id": 1, "place_id": None},
-            result)
+        self.assertEqual("Barack Obama", result["name"])
+        self.assertEqual(1, result["worldId"])
+        self.assertEqual(None, result["placeId"])
+        self.assertIn("lastUpdated", result)
 
     def test_delete_character(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
@@ -92,19 +122,25 @@ class TestApi(unittest.TestCase):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         self.client.post("/worlds/1/places", data=json.dumps({"name": "uo"}))
         result = json.loads(self.client.get("/worlds/1/places").get_data())
-        self.assertEqual([{"id": 1, "name": "uo", "world_id": 1}], result)
+        self.assertEqual("uo", result[0]["name"])
+        self.assertEqual(1, result[0]["worldId"])
+        self.assertIn("lastUpdated", result[0])
 
     def test_get_place(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         self.client.post("/worlds/1/places", data=json.dumps({"name": "uo"}))
         result = json.loads(self.client.get("/worlds/1/places/1").get_data())
-        self.assertEqual({"id": 1, "name": "uo", "world_id": 1}, result)
+        self.assertEqual("uo", result["name"])
+        self.assertEqual(1, result["worldId"])
+        self.assertIn("lastUpdated", result)
 
     def test_put_place(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
         self.client.post("/worlds/1/places", data=json.dumps({"name": "uo"}))
         result = json.loads(self.client.put("/worlds/1/places/1", data=json.dumps({"name": "UO"})).get_data())
-        self.assertEqual({"id": 1, "name": "UO", "world_id": 1}, result)
+        self.assertEqual("UO", result["name"])
+        self.assertEqual(1, result["worldId"])
+        self.assertIn("lastUpdated", result)
 
     def test_delete_place(self):
         self.client.post("/worlds", data=json.dumps({"name": "middle-earth"}))
@@ -121,20 +157,20 @@ class TestApi(unittest.TestCase):
             "name": "Mexico"}))
         self.client.post("/worlds/1/characters", data=json.dumps({
             "name": "Barack Obama",
-            "place_id": 1}))
+            "placeId": 1}))
         self.client.post("/worlds/1/characters", data=json.dumps({
             "name": "Donald Trump",
-            "place_id": 2}))
+            "placeId": 2}))
         result = json.loads(
             self.client.get(
                 "/worlds/1/characters",
-                data=json.dumps({"place_id": 1})).get_data())
+                data=json.dumps({"placeId": 1})).get_data())
         self.assertEqual(1, len(result))
         self.assertEqual("Barack Obama", result[0]["name"])
         result = json.loads(
             self.client.get(
                 "/worlds/1/characters",
-                data=json.dumps({"place_id": 2})).get_data())
+                data=json.dumps({"placeId": 2})).get_data())
         self.assertEqual(1, len(result))
         self.assertEqual("Donald Trump", result[0]["name"])
 
