@@ -5,7 +5,7 @@ var NavBar = React.createClass({
     render: function() {
     	return (
     		<div className = "top-nav">
-    			{this.props.children}
+    			<span className="nav-text">Ymir RPG</span>
     		</div>
     	);
     }

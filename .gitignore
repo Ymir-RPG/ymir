@@ -131,4 +131,4 @@ pyvenv.cfg
 pip-selfcheck.json
 
 ## Node Package Manager
-/node_modules
+## /node_modules
