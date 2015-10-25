@@ -36,7 +36,7 @@ var Category = React.createClass({
 			return(
 				<li key={n}>
 					<a className="name">{i.id}: {i.name}</a>
-					<a href={"CharactersEdit.html?id="+i.id} > | edit </a>
+					<a href={this.props.category} onClick={this.cookieFunction(i.id)}> | edit </a>
 					<a>| delete </a>
 				</li>
 			);
@@ -50,6 +50,10 @@ var Category = React.createClass({
 				</ul>
 	    	</div>
 	    )
+	},
+
+	cookieFunction: function(id) {
+		document.cookie = id;
 	}
 })
 

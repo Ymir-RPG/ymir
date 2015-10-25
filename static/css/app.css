@@ -903,3 +903,14 @@ body {
   height: 300px;
   padding: 5px;
 }
+.nav-text {
+  color: #DDDDDD;
+  font-size: 3rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.text-center {
+  text-align: center;
+}
