@@ -50,19 +50,27 @@ var Category = React.createClass({
 		var items = this.state.worlds.map((i,n)=>{
 			return(
 				<li key={n}>
-					<a className="name">{i.id}: {i.name}</a>
-					<a onClick={function(){self.cookieFunction(i.id)}}> | edit </a>
-					<a onClick={self.rm.bind(this,i.id)}>| delete </a>
+					<a className="name">{i.name}</a>
+					<a className="button" onClick={function(){self.cookieFunction(i.id)}}>edit</a>
+					<a className="button" onClick={self.rm.bind(this,i.id)}>delete</a>
 				</li>
 			);
 		});
 	    return(
-	    	<div id="CAT" className="container">
-				<h1>{this.props.category} <a href={this.props.category + "Add.html"}>+</a> </h1>
-				<input className="search" placeholder="Search" />
-				<ul className="list">
-					{items}
-				</ul>
+	    	<div id="CAT">
+				<div className="header">
+					<div className="container">
+						<h1>{this.props.category} <a href={this.props.category + "Add.html"}>+</a> </h1>
+						<input type="text" className="search" placeholder="Search" />
+					</div>
+				</div>
+				<div className="container">
+					
+					<ul className="list">
+						{items}
+					</ul>
+				</div>
+				
 	    	</div>
 	    )
 	},
