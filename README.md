@@ -4,6 +4,12 @@
 ### What is Ymir?
 Ymir is the driver for the Ymir-RPG application ecosystem. All sub-applications/microservices in the ecosystem are modules that hook in to this driver to function. Ymir is designed to provide value to players of any table-top RPG, from Dungeons and Dragons to your own homebrew system. Microservices can be made to serve any specific tabletop universe, or made to the same generic specifications as the driver.
 
+### Links
+
+http://developer.ymirrpg.com - Ymir API documentation. This is generated with
+`raml2html` from the RAML spec and is automatically deployed when changes are
+checked in.
+
 ### The Universal Laws of Tabletop Games
 Although these really aren't universal laws, these are characteristics that show up in nearly every tabletop RPG, and thus need to have core support in Ymir.
 
@@ -50,4 +56,3 @@ Although these really aren't universal laws, these are characteristics that show
   * Hidden/exposed creatures
 
 I'm quite sure there's more, but that's all I can think of for now. We'll be able to come back and add to the core API once this featureset is complete.
-  
