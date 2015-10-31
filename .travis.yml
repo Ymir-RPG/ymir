@@ -1,6 +1,24 @@
 language: python
 python:
-  - 2.7
-install: 
-  - pip install -r requirements.txt --use-mirrors
+- 2.7
+install:
+- pip install -r requirements.txt --use-mirrors
 script: nosetests
+
+before_deploy:
+  - sudo apt-get install nodejs
+  - sudo apt-get install npm
+  - sudo npm install -g raml2html
+  - mkdir developer.ymirrpg.com
+  - raml2html raml/api.raml > developer.ymirrpg.com/index.html
+
+deploy:
+  provider: s3
+  bucket: developer.ymirrpg.com
+  acl: public_read
+  skip_cleanup: true
+  local_dir: developer.ymirrpg.com
+  access_key_id:
+    secure: j90ik9o9Q/B3zuGUIbMibu3QVAsfHeLJbbuViiCZ5iZme/xibECcn+TQnnKJw1hXViaiuLJrdMOz5WrXNRiX4s4PGj/MOGUnkNdOZBoYIalkNLNydPCzg5NDdNamHYzDntp8gsQ/qrMyKa4zoRuOJXwJNpRiKrXA4s3UDJMdReV+JjTLwwce35O7gqVQC17B2hyaW20bifewAOwBSEhLf6ICuvbPiw0RWjMsQfBsEI4UkHBDoqp2LOWqzdVoq0Ggtnq9Q2fs5JOgwm0EOwgeK0LK7M8dx1BS6OSjQjiVqMhiE0qUwfrZUX8/drLYgi/lvnrK3yuswtg6yDTEunEnB8/TdcLX8ucVpNAXZTi4vUTYBbs6W1HW6QxUkjE5/AAUpwk9ZshCaB2nRj6VC4yCr5KSQuDyNZZKST21RFe4ahdtADzLmeHtb73LKOW0IDc1CViCoLVfjUfrKg0SE3V7LPYCi4W9ZDEW5hyXjISIlcYCh8nA6b+vbtyJLGkSubPBYsFtj8aVh37ZTTVcKqylE90D5fzvJvbE0Fn/j+Z/u2/CtuOwFLATOH0yCPfpT98zvM+VzSDYNvEjItEkLtUMo8wYNw05RbeOLysuAki/4kKGqgJXNMtqe8QcAEsl4HBwrfWQNI3p3AmO8AhW3ZEu/tIHBtFexjFcey66LlpShgw=
+  secret_access_key:
+    secure: OTvc1nxmpiuEInW/zezrC9117NtJJPz9+3rTiypAafIEdzJg4GmYJYyUveY3Fhn+BBJAxU3oWHS0cYDaGZjpFNwvy4/Q8yfy2JXOZ9ckgc89ljbcJ9P48+O8HHLym3NinSx+vB215Bvuu4/LcMXezbFS3ozzbW4EcB1XtT3PCqMxNH8F6BSeKDtf5g5VQKp//blSPKt4x5LeFzsuwe4RP/5A3Dj1aurc9N/Qh9AT/wj4flzIU2QoDSTVrG0vj671mQAWzxKXQ09zljlsaIU5wQFy9k20HB9h0fq+HRSQ9206IvMif6qJ58n5H6lUWCkKKLtVoERcq3e9OEkBzrtA0v9/2SVyIfcd8aC9wunw20hzD98xi5XT1WDDyjZSTHUxoV76QVIUKu+rUcOyyDZZwo/7rmwRZ/DFklcNqxY+/6yFOgFNwnCi3O2DZ017thdgPYckoNaB2Ohki18WbPNaFkgfH6s+LPVf9cqHI8dNrQvdHrWeCOrotWFAd4TaqhgB6tuo8FGAbXiI3zx2Cs7gq322WWNrYUUjpeCJmsMOgBcTZfsOjZwWJJJJVqwAZvmRoul3n+4LSp+aWPCq8dhcdZr8HotsrLdNpyCrKnaQ9Pg0hxZAzbgW8ddGIQaGFFshP4qSvp4vLg2EIPNbBi157CMPuwY5mgUfVhkOD24VPk8=
