@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/skylerberg/ymir.svg?branch=master)](https://travis-ci.org/Ymir-RPG/ymir)
-
 ## YMIR: Tabletop RPG Campaign Management Ecosystem
 ### What is Ymir?
 Ymir is the driver for the Ymir-RPG application ecosystem. All sub-applications/microservices in the ecosystem are modules that hook in to this driver to function. Ymir is designed to provide value to players of any table-top RPG, from Dungeons and Dragons to your own homebrew system. Microservices can be made to serve any specific tabletop universe, or made to the same generic specifications as the driver.
